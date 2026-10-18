@@ -301,13 +301,32 @@ font-size: clamp(42px, 7vw, 76px);
   text-align: center;
 }
 
+.countdown-media-row {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  width: min(100%, 760px);
+  margin: 0 auto 30px;
+}
+
 .countdown-crest {
   display: block;
-  width: 25vw;
-  max-width: 60vw;
-  margin: -20px auto 30px auto;
+  width: clamp(150px, 22vw, 270px);
+  max-width: 42%;
+  height: auto;
+  margin: 0;
   animation: crestFloat 5s ease-in-out infinite;
   transform-origin: center center;
+}
+
+.countdown-video {
+  display: block;
+  width: min(48%, 380px);
+  aspect-ratio: 4 / 3;
+  object-fit: contain;
+  border-radius: 12px;
 }
 
 @keyframes crestFloat {
@@ -592,14 +611,21 @@ font-size: clamp(42px, 7vw, 76px);
 .timeline-time {
   font-family: 'Playfair Display', serif;
   font-weight: 600;
-  font-size: 19px;
+  font-size: 12px;
   color: #ffffff;
   margin-bottom: 4px;
 }
 
+.timeline-theme {
+  font-family: 'Playfair Display', serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
 .timeline-label {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 15px;
+  font-size: 18px;
   letter-spacing: 1.4px;
   text-transform: uppercase;
   color: #efe5cf;
@@ -1010,8 +1036,8 @@ font-size: clamp(42px, 7vw, 76px);
   }
 
   .countdown-crest {
-    width: 25vw;
-    max-width: 70vw;
+    width: min(38%, 240px);
+    max-width: 38%;
   }
 
   .countdown-title,
@@ -1050,6 +1076,20 @@ font-size: clamp(42px, 7vw, 76px);
 @media (max-width: 520px) {
   .countdown {
     padding: 56px 18px;
+  }
+
+  .countdown-media-row {
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  .countdown-crest {
+    width: 38%;
+    max-width: 38%;
+  }
+
+  .countdown-video {
+    width: 55%;
   }
 
   .countdown-title,
@@ -1159,7 +1199,12 @@ font-size: clamp(42px, 7vw, 76px);
   </section>
 
   <section class="countdown">
-    <img src="./Kk_verse.png" alt="Daniela & Alexandre's crest" class="countdown-crest">
+    <div class="countdown-media-row">
+      <img src="./Kk_verse.png" alt="Kaushik & Kinjal Icon" class="countdown-crest">
+      <video autoplay muted loop playsinline class="countdown-video">
+        <source src="./twril2.mp4" type="video/mp4">
+      </video>
+    </div>
     <div class="countdown-title">Countdown</div>
     <div class="countdown-subtitle">Until the most special day of our lives</div>
 
@@ -1216,14 +1261,18 @@ font-size: clamp(42px, 7vw, 76px);
       <div class="timeline-item left">
         <div class="timeline-time">12:15 pm (4th dec)</div>
         <div class="timeline-label">Haldi<br>Carnival</div>
+        <div class="timeline-theme">(Theme - Pretty in Pastels)</div>
       </div>
       <div class="timeline-item right">
         <div class="timeline-time">7:15 pm (4th dec)</div>
         <div class="timeline-label">Ring Ceremony<br>& DJ Night</div>
+        <div class="timeline-theme">(Theme - Bring your bling)</div>
+
       </div>
       <div class="timeline-item left">
         <div class="timeline-time">10:15 am (5th dec)</div>
         <div class="timeline-label">Baarat eh<br>Jashan</div>
+        <div class="timeline-theme">(Theme - Go Traditional)</div>
       </div>
       <div class="timeline-item right">
         <div class="timeline-time">12:15 pm (5th dec)</div>
@@ -1233,18 +1282,6 @@ font-size: clamp(42px, 7vw, 76px);
         <div class="timeline-time">5:30 pm (5th dec)</div>
         <div class="timeline-label">Reception & Gala Dinner</div>
       </div>
-      <!-- <div class="timeline-item right">
-        <div class="timeline-time">21h00</div>
-        <div class="timeline-label">Cake<br>Cutting</div>
-      </div>
-      <div class="timeline-item right">
-        <div class="timeline-time">22h00</div>
-        <div class="timeline-label">First<br>Dance</div>
-      </div>
-      <div class="timeline-item left">
-        <div class="timeline-time">22h30</div>
-        <div class="timeline-label">Late-night food<br>& Party</div>
-      </div> -->
     </div>
 
     <img src="./KK8_without_bg.png" alt="Front of the house" class="page-bottom-img">
@@ -1290,7 +1327,7 @@ font-size: clamp(42px, 7vw, 76px);
 </div>
 
 <script>
-const weddingDate = new Date("December 5, 2026 00:00:00").getTime();
+const weddingDate = new Date("December 4, 2026 00:00:00").getTime();
 
 function updateCountdown() {
   const now = new Date().getTime();
