@@ -386,6 +386,8 @@ font-size: clamp(42px, 7vw, 76px);
 }
 
 .info-card-link {
+  display: inline-block;
+  margin-top: 14px;
   color: var(--sage-deep);
   text-decoration: none;
   border-bottom: 1px solid rgba(103,107,80,0.4);
@@ -398,6 +400,13 @@ font-size: clamp(42px, 7vw, 76px);
   overflow: hidden;
   line-height: 0;
   display: block;
+}
+
+.info-card-map iframe {
+  display: block;
+  width: 100%;
+  height: 220px;
+  border: 0;
 }
 
 .page-quinta .info-card-photo {
@@ -800,27 +809,27 @@ font-size: clamp(42px, 7vw, 76px);
 
       <div class="slider-wrap">
         <div class="slider-track">
-          <div class="slide"><img src="./momento1.jpeg" alt="Moment 1"></div>
-          <div class="slide"><img src="./momento2.jpeg" alt="Moment 2"></div>
-          <div class="slide"><img src="./momento3.jpeg" alt="Moment 3"></div>
-          <div class="slide"><img src="./momento4.jpeg" alt="Moment 4"></div>
-          <div class="slide"><img src="./momento5.jpeg" alt="Moment 5"></div>
-          <div class="slide"><img src="./momento6.jpeg" alt="Moment 6"></div>
-          <div class="slide"><img src="./momento7.jpeg" alt="Moment 7"></div>
-          <div class="slide"><img src="./momento8.jpeg" alt="Moment 8"></div>
-          <div class="slide"><img src="./momento9.jpeg" alt="Moment 9"></div>
-          <div class="slide"><img src="./momento10.jpeg" alt="Moment 10"></div>
+          <div class="slide"><img src="./KK_photo1.png" alt="Moment 1"></div>
+          <div class="slide"><img src="./KK_photo2.png" alt="Moment 2"></div>
+          <div class="slide"><img src="./KK_photo3.png" alt="Moment 3"></div>
+          <div class="slide"><img src="./KK_photo4.png" alt="Moment 4"></div>
+          <div class="slide"><img src="./KK_photo5.png" alt="Moment 5"></div>
+          <div class="slide"><img src="./KK_photo1.png" alt="Moment 6"></div>
+          <div class="slide"><img src="./KK_photo2.png" alt="Moment 7"></div>
+          <div class="slide"><img src="./KK_photo3.png" alt="Moment 8"></div>
+          <div class="slide"><img src="./KK_photo4.png" alt="Moment 9"></div>
+          <div class="slide"><img src="./KK_photo5.png" alt="Moment 10"></div>
 
-          <div class="slide"><img src="./momento1.jpeg" alt="Moment 1"></div>
-          <div class="slide"><img src="./momento2.jpeg" alt="Moment 2"></div>
-          <div class="slide"><img src="./momento3.jpeg" alt="Moment 3"></div>
-          <div class="slide"><img src="./momento4.jpeg" alt="Moment 4"></div>
-          <div class="slide"><img src="./momento5.jpeg" alt="Moment 5"></div>
-          <div class="slide"><img src="./momento6.jpeg" alt="Moment 6"></div>
-          <div class="slide"><img src="./momento7.jpeg" alt="Moment 7"></div>
-          <div class="slide"><img src="./momento8.jpeg" alt="Moment 8"></div>
-          <div class="slide"><img src="./momento9.jpeg" alt="Moment 9"></div>
-          <div class="slide"><img src="./momento10.jpeg" alt="Moment 10"></div>
+          <div class="slide"><img src="./KK_photo1.png" alt="Moment 1"></div>
+          <div class="slide"><img src="./KK_photo2.png" alt="Moment 2"></div>
+          <div class="slide"><img src="./KK_photo3.png" alt="Moment 3"></div>
+          <div class="slide"><img src="./KK_photo4.png" alt="Moment 4"></div>
+          <div class="slide"><img src="./KK_photo5.png" alt="Moment 5"></div>
+          <div class="slide"><img src="./KK_photo1.png" alt="Moment 6"></div>
+          <div class="slide"><img src="./KK_photo2.png" alt="Moment 7"></div>
+          <div class="slide"><img src="./KK_photo3.png" alt="Moment 8"></div>
+          <div class="slide"><img src="./KK_photo4.png" alt="Moment 9"></div>
+          <div class="slide"><img src="./KK_photo5.png" alt="Moment 10"></div>
         </div>
       </div>
     </div>
@@ -871,24 +880,25 @@ font-size: clamp(42px, 7vw, 76px);
     <div class="page-subtitle">Where we'll celebrate</div>
 
     <div class="info-card">
-      <img src="./vista.png" alt="Quinta do Boiro" class="info-card-photo">
-      <div class="info-card-name">Quinta do Boiro</div>
+      <img src="./vistaSmallSizNon_Background.png" alt="Taragarh Fort, Bundi" class="info-card-photo">
+      <div class="info-card-name">Taragarh Fort, Bundi</div>
 
       <div class="info-divider"></div>
       <div class="info-card-text">04 & 05 December 2026</div>
 
       <div class="info-divider"></div>
-      <div class="info-card-text">Gangaur Hotel and Resorts</div>
+      <div class="info-card-text">Venue - Gangaur Hotel and Resorts</div>
 
-      <a href="https://www.google.com/maps/search/?api=1&amp;query=25.4321734%2C75.6353202" target="_blank" rel="noopener" class="info-card-map">
-        <iframe src="https://www.google.com/maps?q=25.4321734,75.6353202&amp;output=embed" width="100%" height="220" style="border:0; pointer-events:none;" loading="lazy"></iframe>
-      </a>
+      <div class="info-card-map">
+        <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=75.6253%2C25.4222%2C75.6453%2C25.4422&amp;layer=mapnik&amp;marker=25.4321734%2C75.6353202" title="Map showing Gangaur Hotel and Resorts in Bundi" loading="eager"></iframe>
+      </div>
+      <a href="https://www.google.com/maps/place/Gangaur+Hotel+and+Resorts/data=!4m2!3m1!1s0x0:0x60d92681837de956?sa=X&amp;ved=1t:2428&amp;ictx=111" target="_blank" rel="noopener" class="info-card-link">Open in Google Maps</a>
     </div>
   </section>
 
   <section class="page-section page-igreja">
-    <div class="page-title">Church</div>
-    <div class="page-subtitle">Ceremony Venue</div>
+    <div class="page-title">RSVP</div>
+    <div class="page-subtitle">Please Come and Enjoy</div>
 
     <!-- <div class="info-card">
       <img src="./igreja.png" alt="Basilica of Santa Quitéria de Meca" class="info-card-photo">
