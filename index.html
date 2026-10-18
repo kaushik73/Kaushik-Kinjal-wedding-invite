@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kaushik & Kinjal</title>
+<link rel="icon" type="image/x-icon" href="./favicon-brasao.ico">
+<link rel="apple-touch-icon" href="./favicon-brasao.png">
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Cormorant+Garamond:wght@400;500;600&family=Great+Vibes&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --sage-main: #8a8d6c;
+  --sage-dark: #76795d;
+  --sage-deep: #676b50;
+  --cream: #f3eee3;
+  --text-dark: #445248;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: #dfe5de;
+  overflow: hidden;
+}
+
+h1, h2 {
+  font-family: 'Playfair Display', serif;
+}
+
+/* SCENE */
+.scene {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #dfe5de;
+}
+
+/* ENVELOPE */
+.envelope {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+  background: #dfe5de url('./wedding_invitation_centered_1654x1654.png') center / cover no-repeat;
+  transition:
+    opacity 1s ease,
+    transform 1.2s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 1s ease;
+  transform-origin: center center;
+}
+
+.envelope.open {
+  opacity: 0;
+  transform: scale(1.04) translateX(18px);
+  filter: blur(2px);
+}
+
+.seal-hitbox {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 150px;
+  height: 150px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: transparent;
+}
+
+/* MAIN */
+.main {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background:
+    linear-gradient(rgba(248,248,244,0.88), rgba(248,248,244,0.88)),
+    url('./heroNew.png') center center / cover no-repeat;
+  overflow-y: auto;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 1s ease;
+}
+
+.main.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+section {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 40px;
+  text-align: center;
+}
+
+.hero {
+  background: url('./heroNew.png') center center / cover no-repeat;
+  color: var(--text-dark);
+  padding: 0;
+}
+
+.hero-content {
+  width: min(100%, 720px);
+  min-height: 100vh;
+  padding: 8vh 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4vh;
+  align-items: center;
+}
+
+.hero-verse {
+  font-family: 'Cormorant Garamond', serif;
+
+  font-size: clamp(15px, 2.2vw, 22px);
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--text-dark);
+}
+
+.hero-verse span {
+  display: block;
+  margin-top: 8px;
+  font-size: 0.8em;
+}
+
+.hero-names {
+font-family: 'Great Vibes', cursive; 
+font-size: clamp(42px, 7vw, 76px);
+  font-weight: 400;
+  line-height: 1.1;
+  color: var(--text-dark);
+}
+
+.hero-names span {
+  display: block;
+  font-size: 0.65em;
+}
+
+.hero-date {
+  display: grid;
+  grid-template-columns: minmax(80px, 1fr) auto minmax(80px, 1fr);
+  align-items: center;
+  gap: 12px;
+  color: var(--text-dark);
+}
+
+.hero-date-side {
+  padding: 8px 12px;
+  border-top: 1px solid currentColor;
+  border-bottom: 1px solid currentColor;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(13px, 2vw, 18px);
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  white-space: nowrap;
+}
+
+.hero-date strong {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(44px, 7vw, 68px);
+  font-weight: 500;
+  line-height: 1;
+}
+
+.hero-date-year {
+  grid-column: 2;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: 2px;
+}
+
+@media (max-width: 520px) {
+  .hero-content {
+    padding: 7vh 12px;
+  }
+
+  .hero-date {
+    gap: 6px;
+  }
+
+  .hero-date-side {
+    padding: 7px 5px;
+    letter-spacing: 0.8px;
+  }
+}
+
+/* COUNTDOWN */
+.countdown {
+  width: 100vw;
+  min-height: 100vh;
+  padding: 100px 40px;
+  margin-left: calc(50% - 50vw);
+  background: var(--sage-main);
+  color: white;
+  text-align: center;
+}
+
+.countdown-crest {
+  display: block;
+  width: 25vw;
+  max-width: 60vw;
+  margin: -20px auto 30px auto;
+  animation: crestPulse 2.8s ease-in-out infinite;
+  transform-origin: center center;
+}
+
+@keyframes crestPulse {
+  0%   { transform: scale(1); }
+  8%   { transform: scale(1.04); }
+  16%  { transform: scale(1); }
+  24%  { transform: scale(1.06); }
+  36%  { transform: scale(1); }
+  100% { transform: scale(1); }
+}
+
+.countdown-title {
+  font-family: 'Great Vibes', cursive;
+  font-size: 52px;
+  color: #ffffff;
+  margin-bottom: 8px;
+}
+
+.countdown-subtitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  color: #e9dfc8;
+  margin-bottom: 56px;
+}
+
+#timer {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 80px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+#timer div span {
+  display: block;
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(54px, 7vw, 76px);
+  line-height: 1;
+  color: #ffffff;
+  margin-bottom: 10px;
+}
+
+#timer div p {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  letter-spacing: 2.6px;
+  text-transform: uppercase;
+  color: #efe5cf;
+}
+
+/* WELCOME */
+.gallery {
+  min-height: auto;
+  padding: 90px 0 110px;
+  text-align: center;
+  color: var(--text-dark);
+}
+
+.welcome-inner {
+  width: 100%;
+}
+
+.welcome-title {
+  font-family: 'Great Vibes', cursive;
+  font-size: 56px;
+  color: var(--sage-deep);
+  margin-bottom: 18px;
+}
+
+.welcome-text {
+  max-width: 900px;
+  margin: 0 auto 50px;
+  padding: 0 24px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  line-height: 1.45;
+  color: #4d594f;
+}
+
+/* SLIDER */
+.slider-wrap {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  padding: 10px 0;
+}
+
+.slider-track {
+  display: flex;
+  width: max-content;
+  gap: 26px;
+  animation: scrollSlider 42s linear infinite;
+}
+
+.slide {
+  flex: 0 0 auto;
+  width: 260px;
+}
+
+.slide img {
+  width: 100%;
+  height: 360px;
+  object-fit: cover;
+  border-radius: 22px;
+  display: block;
+  box-shadow: 0 12px 24px rgba(0,0,0,0.12);
+}
+
+@keyframes scrollSlider {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.page-subtitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 15px;
+  letter-spacing: 2.2px;
+  text-transform: uppercase;
+  margin-bottom: 46px;
+}
+
+.info-card {
+  background: var(--cream);
+  color: var(--sage-deep);
+  border-radius: 28px;
+  padding: 40px 30px 34px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 18px 40px rgba(0,0,0,0.14);
+}
+
+.info-card-photo {
+  width: 78%;
+  max-width: 260px;
+  height: auto;
+  display: block;
+  margin: 0 auto 18px;
+}
+
+.info-card-name {
+  font-family: 'Great Vibes', cursive;
+  font-size: 30px;
+  margin-bottom: 26px;
+}
+
+.info-divider {
+  width: 70px;
+  height: 1px;
+  background: var(--sage-main);
+  opacity: 0.5;
+  margin: 22px auto;
+}
+
+.info-card-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 19px;
+  letter-spacing: 0.4px;
+  line-height: 1.5;
+}
+
+.info-card-link {
+  color: var(--sage-deep);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(103,107,80,0.4);
+  padding-bottom: 2px;
+}
+
+.info-card-map {
+  margin-top: 26px;
+  border-radius: 16px;
+  overflow: hidden;
+  line-height: 0;
+  display: block;
+}
+
+.page-quinta .info-card-photo {
+  width: calc(100% + 60px);
+  max-width: none;
+  margin-left: -30px;
+  margin-right: -30px;
+  margin-top: -40px;
+  margin-bottom: -20px;
+}
+
+.page-quinta .info-card {
+  padding-top: 0;
+}
+
+@media (max-width: 520px) {
+  .info-card {
+    padding: 32px 20px 28px;
+  }
+
+  .info-card-name {
+    font-size: 26px;
+  }
+}
+
+.timeline {
+  position: relative;
+  width: 100%;
+  max-width: 380px;
+  margin: 0 auto;
+  padding: 10px 0 4px;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 4px;
+  bottom: 4px;
+  width: 1px;
+  background: rgba(255,255,255,0.4);
+  transform: translateX(-50%);
+}
+
+.timeline-item {
+  position: relative;
+  width: 50%;
+  padding: 22px 26px;
+}
+
+.timeline-item.left {
+  left: 0;
+  text-align: right;
+}
+
+.timeline-item.right {
+  left: 50%;
+  text-align: left;
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  top: 27px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #ffffff;
+}
+
+.timeline-item.left::before {
+  right: -5px;
+}
+
+.timeline-item.right::before {
+  left: -5px;
+}
+
+.timeline-time {
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+  font-size: 19px;
+  color: #ffffff;
+  margin-bottom: 4px;
+}
+
+.timeline-label {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 15px;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: #efe5cf;
+  line-height: 1.4;
+}
+
+@media (max-width: 420px) {
+  .timeline-item {
+    padding: 18px 14px;
+  }
+
+  .timeline-time {
+    font-size: 17px;
+  }
+
+  .timeline-label {
+    font-size: 13px;
+    letter-spacing: 1px;
+  }
+}
+
+.page-window-img {
+  width: 100%;
+  max-width: 280px;
+  height: auto;
+  margin: 0 auto 24px;
+  display: block;
+}
+
+.page-bottom-img {
+  width: 100%;
+  max-width: 280px;
+  height: auto;
+  margin: 32px auto 0;
+  display: block;
+}
+
+.page-rsvp {
+  color: var(--sage-deep);
+}
+
+.rsvp-frame {
+  width: 100%;
+  max-width: 480px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 18px 40px rgba(0,0,0,0.14);
+  background: #ffffff;
+  line-height: 0;
+}
+
+.rsvp-frame iframe {
+  width: 100%;
+  height: 600px;
+  border: 0;
+  display: block;
+}
+
+@media (max-width: 520px) {
+  .rsvp-frame iframe {
+    height: 560px;
+  }
+}
+
+/* PAGES: CHURCH / VENUE / SCHEDULE */
+.page-section {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 90px 24px;
+  text-align: center;
+}
+
+.page-title {
+  font-family: 'Great Vibes', cursive;
+  font-size: 56px;
+  margin-bottom: 18px;
+}
+
+.page-igreja {
+  background: var(--sage-main);
+  color: #ffffff;
+}
+
+.page-quinta {
+  color: var(--sage-deep);
+}
+
+.page-cronograma {
+  background: var(--sage-main);
+  color: #ffffff;
+}
+
+@media (max-width: 900px) {
+  .page-title {
+    font-size: 42px;
+  }
+}
+
+@media (max-width: 520px) {
+  .page-title {
+    font-size: 36px;
+  }
+}
+
+/* STORY */
+.story {
+  color: var(--text-dark);
+  padding: 90px 24px 110px;
+  min-height: auto;
+}
+
+.story-title {
+  font-family: 'Great Vibes', cursive;
+  font-size: 58px;
+  color: var(--sage-deep);
+  margin-bottom: 34px;
+}
+
+.story-grid {
+  /* display: */
+  width: 100%;
+  max-width: 1700px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  align-items: start;
+}
+
+.story-card {
+  background: rgba(255,255,255,0.10);
+  padding: 14px;
+  border-radius: 26px;
+  box-shadow: 0 14px 34px rgba(0,0,0,0.08);
+  backdrop-filter: blur(3px);
+}
+
+.story-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 18px;
+}
+
+@media (max-width: 1100px) {
+  .story-grid {
+    grid-template-columns: 1fr;
+    max-width: 900px;
+  }
+}
+
+@media (max-width: 900px) {
+  .countdown {
+    padding: 72px 24px;
+    min-height: auto;
+  }
+
+  .countdown-crest {
+    width: 25vw;
+    max-width: 70vw;
+  }
+
+  .countdown-title,
+  .welcome-title,
+  .story-title {
+    font-size: 42px;
+  }
+
+  #timer {
+    grid-template-columns: repeat(2, minmax(120px, 1fr));
+    gap: 30px 18px;
+    max-width: 420px;
+  }
+
+  .welcome-text {
+    font-size: 23px;
+    max-width: 760px;
+  }
+}
+
+@media (max-width: 768px) {
+  .seal-hitbox {
+    width: 120px;
+    height: 120px;
+  }
+
+  .slide {
+    width: 220px;
+  }
+
+  .slide img {
+    height: 310px;
+  }
+}
+
+@media (max-width: 520px) {
+  .countdown {
+    padding: 56px 18px;
+  }
+
+  .countdown-title,
+  .welcome-title,
+  .story-title {
+    font-size: 36px;
+  }
+
+  .countdown-subtitle {
+    font-size: 13px;
+    margin-bottom: 38px;
+  }
+
+  #timer {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 26px 12px;
+  }
+
+  #timer div span {
+    font-size: 52px;
+  }
+
+  #timer div p {
+    font-size: 15px;
+    letter-spacing: 1.8px;
+  }
+
+  .welcome-text {
+    font-size: 20px;
+    line-height: 1.5;
+    margin-bottom: 34px;
+  }
+
+  .slide {
+    width: 190px;
+  }
+
+  .slide img {
+    height: 270px;
+    border-radius: 18px;
+  }
+
+  .slider-track {
+    gap: 18px;
+  }
+
+  .story {
+    padding: 70px 12px 90px;
+  }
+
+  .story-card {
+    padding: 10px;
+    border-radius: 20px;
+  }
+
+  .story-card img {
+    border-radius: 14px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<audio id="music" loop preload="auto">
+  <source src="daylight.mp3" type="audio/mp3">
+</audio>
+
+<div class="scene" id="scene">
+  <div class="envelope" id="envelope">
+    <div class="seal-hitbox"></div>
+  </div>
+</div>
+
+<div class="main" id="main">
+  <section class="hero">
+    <div class="hero-content">
+      <p class="hero-verse">“ A Love that feels like home<br>A forever that feels like magic”
+        <!-- <span>Matthew 19:6</span> -->
+      </p>
+      <h1 class="hero-names">Kaushik<span>&amp;</span>Kinjal</h1>
+      <div class="hero-date" aria-label="Sunday, December 5, 2026">
+        <span class="hero-date-side">Sunday</span>
+        <strong>5</strong>
+        <span class="hero-date-side">December</span>
+        <span class="hero-date-year">2026</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="countdown">
+    <img src="./Kk_verse.png" alt="Daniela & Alexandre's crest" class="countdown-crest">
+    <div class="countdown-title">Countdown</div>
+    <div class="countdown-subtitle">Until the most special day of our lives</div>
+
+    <div id="timer">
+      <div><span id="days">0</span><p>Days</p></div>
+      <div><span id="hours">0</span><p>Hours</p></div>
+      <div><span id="minutes">0</span><p>Minutes</p></div>
+      <div><span id="seconds">0</span><p>Seconds</p></div>
+    </div>
+  </section>
+
+  <section class="gallery">
+    <div class="welcome-inner">
+      <div class="welcome-title">Welcome</div>
+      <div class="welcome-text">
+        We warmly invite you to celebrate our wedding with us in the charming town of Alenquer. We look forward to sharing this unforgettable moment with the most special people in our lives.
+      </div>
+
+      <div class="slider-wrap">
+        <div class="slider-track">
+          <div class="slide"><img src="./momento1.jpeg" alt="Moment 1"></div>
+          <div class="slide"><img src="./momento2.jpeg" alt="Moment 2"></div>
+          <div class="slide"><img src="./momento3.jpeg" alt="Moment 3"></div>
+          <div class="slide"><img src="./momento4.jpeg" alt="Moment 4"></div>
+          <div class="slide"><img src="./momento5.jpeg" alt="Moment 5"></div>
+          <div class="slide"><img src="./momento6.jpeg" alt="Moment 6"></div>
+          <div class="slide"><img src="./momento7.jpeg" alt="Moment 7"></div>
+          <div class="slide"><img src="./momento8.jpeg" alt="Moment 8"></div>
+          <div class="slide"><img src="./momento9.jpeg" alt="Moment 9"></div>
+          <div class="slide"><img src="./momento10.jpeg" alt="Moment 10"></div>
+
+          <div class="slide"><img src="./momento1.jpeg" alt="Moment 1"></div>
+          <div class="slide"><img src="./momento2.jpeg" alt="Moment 2"></div>
+          <div class="slide"><img src="./momento3.jpeg" alt="Moment 3"></div>
+          <div class="slide"><img src="./momento4.jpeg" alt="Moment 4"></div>
+          <div class="slide"><img src="./momento5.jpeg" alt="Moment 5"></div>
+          <div class="slide"><img src="./momento6.jpeg" alt="Moment 6"></div>
+          <div class="slide"><img src="./momento7.jpeg" alt="Moment 7"></div>
+          <div class="slide"><img src="./momento8.jpeg" alt="Moment 8"></div>
+          <div class="slide"><img src="./momento9.jpeg" alt="Moment 9"></div>
+          <div class="slide"><img src="./momento10.jpeg" alt="Moment 10"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="page-section page-cronograma">
+    <img src="./janela.png" alt="Window with a view" class="page-window-img">
+    <div class="page-title">Schedule</div>
+    <div class="page-subtitle">04 & 05 December 2026</div>
+
+    <div class="timeline">
+      <div class="timeline-item left">
+        <div class="timeline-time">13h00</div>
+        <div class="timeline-label">Church<br>Ceremony</div>
+      </div>
+      <div class="timeline-item right">
+        <div class="timeline-time">15h30</div>
+        <div class="timeline-label">Welcome<br>Drinks</div>
+      </div>
+      <div class="timeline-item left">
+        <div class="timeline-time">17h00</div>
+        <div class="timeline-label">Photos with the<br>Newlyweds</div>
+      </div>
+      <div class="timeline-item right">
+        <div class="timeline-time">18h00</div>
+        <div class="timeline-label">Dinner</div>
+      </div>
+      <div class="timeline-item left">
+        <div class="timeline-time">21h00</div>
+        <div class="timeline-label">Cake<br>Cutting</div>
+      </div>
+      <div class="timeline-item right">
+        <div class="timeline-time">22h00</div>
+        <div class="timeline-label">First<br>Dance</div>
+      </div>
+      <div class="timeline-item left">
+        <div class="timeline-time">22h30</div>
+        <div class="timeline-label">Late-night food<br>& Party</div>
+      </div>
+    </div>
+
+    <img src="./frentecasa.jpeg" alt="Front of the house" class="page-bottom-img">
+  </section>
+
+  <section class="page-section page-quinta">
+    <div class="page-title">Reception</div>
+    <div class="page-subtitle">Where we'll celebrate</div>
+
+    <div class="info-card">
+      <img src="./vista.png" alt="Quinta do Boiro" class="info-card-photo">
+      <div class="info-card-name">Quinta do Boiro</div>
+
+      <div class="info-divider"></div>
+      <div class="info-card-text">04 & 05 December 2026</div>
+
+      <div class="info-divider"></div>
+      <div class="info-card-text">Gangaur Hotel and Resorts</div>
+
+      <a href="https://www.google.com/maps/search/?api=1&amp;query=25.4321734%2C75.6353202" target="_blank" rel="noopener" class="info-card-map">
+        <iframe src="https://www.google.com/maps?q=25.4321734,75.6353202&amp;output=embed" width="100%" height="220" style="border:0; pointer-events:none;" loading="lazy"></iframe>
+      </a>
+    </div>
+  </section>
+
+  <section class="page-section page-igreja">
+    <div class="page-title">Church</div>
+    <div class="page-subtitle">Ceremony Venue</div>
+
+    <!-- <div class="info-card">
+      <img src="./igreja.png" alt="Basilica of Santa Quitéria de Meca" class="info-card-photo">
+      <div class="info-card-name">Basílica de Santa<br>Quitéria de Meca</div>
+
+      <div class="info-divider"></div>
+      <div class="info-card-text">04 & 05 December 2026</div>
+
+      <div class="info-divider"></div>
+      <div class="info-card-text">Largo de Santa Quitéria de Meca</div>
+
+      <div class="info-divider"></div>
+      <div class="info-card-text">Meca, 2580-181 — Alenquer</div>
+
+      <a href="https://www.google.com/maps/search/?api=1&amp;query=25.4321734%2C75.6353202" target="_blank" rel="noopener" class="info-card-map">
+        <iframe src="https://www.google.com/maps?q=25.4321734,75.6353202&amp;output=embed" width="100%" height="220" style="border:0; pointer-events:none;" loading="lazy"></iframe>
+      </a>
+    </div> -->
+  </section>
+
+  <!-- <section class="page-section page-rsvp">
+    <div class="page-title">RSVP</div>
+    <div class="page-subtitle">Please RSVP</div>
+
+    <div class="rsvp-frame">
+      <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfBD8itQrpQq_FFUW0i-0F2_70XvyiPj5qkGRmS70fELZoaiA/viewform?embedded=true" loading="lazy">Loading…</iframe>
+    </div>
+  </section> -->
+
+  <!-- <section class="story"> -->
+    <!-- <div class="story-title">Once upon a time...</div> -->
+
+    <!-- <div class="story-grid">
+      <div class="story-card">
+        <img src="./historia1.jpeg" alt="Once upon a time - chapter 1">
+      </div>
+      <div class="story-card">
+        <img src="./historia2.jpeg" alt="Once upon a time - chapter 2">
+      </div>
+    </div> -->
+  <!-- </section> -->
+</div>
+
+<script>
+const weddingDate = new Date("December 5, 2026 00:00:00").getTime();
+
+function updateCountdown() {
+  const now = new Date().getTime();
+  const dist = weddingDate - now;
+
+  days.textContent = Math.floor(dist / (1000*60*60*24));
+  hours.textContent = Math.floor((dist % (1000*60*60*24))/(1000*60*60));
+  minutes.textContent = Math.floor((dist % (1000*60*60))/(1000*60));
+  seconds.textContent = Math.floor((dist % (1000*60))/1000);
+}
+
+setInterval(updateCountdown,1000);
+updateCountdown();
+
+const music = document.getElementById('music');
+const envelope = document.getElementById('envelope');
+const scene = document.getElementById('scene');
+const main = document.getElementById('main');
+
+envelope.addEventListener('click', () => {
+  music.volume = 0;
+  music.play();
+
+  let vol = 0;
+  const fade = setInterval(() => {
+    if (vol < 0.4) {
+      vol += 0.02;
+      music.volume = vol;
+    } else clearInterval(fade);
+  },200);
+
+  envelope.classList.add('open');
+
+  setTimeout(()=>{
+    scene.style.display='none';
+    main.classList.add('show');
+  },1100);
+
+});
+
+</script>
+
+</body>
+</html>
