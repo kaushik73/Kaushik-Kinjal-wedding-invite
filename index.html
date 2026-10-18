@@ -138,6 +138,7 @@ h1, h2 {
 .main.show {
   opacity: 1;
   visibility: visible;
+  overflow-x: hidden;
 }
 
 section {
@@ -273,6 +274,36 @@ font-size: clamp(42px, 7vw, 76px);
   font-size: 17px;
   font-weight: 600;
   letter-spacing: 2px;
+}
+
+.scroll-cue {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 3vh;
+  gap: 8px;
+  margin-top: -1vh;
+  color: var(--text-dark);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.scroll-cue-arrow {
+  width: 16px;
+  height: 16px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg);
+  animation: scrollCueBounce 1.5s ease-in-out infinite;
+}
+
+@keyframes scrollCueBounce {
+  0%, 100% { transform: translateY(-3px) rotate(45deg); }
+  50% { transform: translateY(4px) rotate(45deg); }
 }
 
 @media (max-width: 520px) {
@@ -1195,6 +1226,10 @@ font-size: clamp(42px, 7vw, 76px);
         <span class="hero-date-side">December</span>
         <span class="hero-date-year">2026</span>
       </div>
+      <span class="scroll-cue">
+        <span>Keep scrolling to explore</span>
+        <span class="scroll-cue-arrow" aria-hidden="true"></span>
+      </span>
     </div>
   </section>
 
@@ -1288,7 +1323,7 @@ font-size: clamp(42px, 7vw, 76px);
   </section>
 
   <section class="page-section page-quinta">
-    <div class="page-title">Reception</div>
+    <div class="page-title">Venue</div>
     <div class="page-subtitle">Where we'll celebrate</div>
 
     <div class="info-card">
@@ -1299,7 +1334,7 @@ font-size: clamp(42px, 7vw, 76px);
       <div class="info-card-text">04 & 05 December 2026</div>
 
       <div class="info-divider"></div>
-      <div class="info-card-text">Venue - Gangaur Hotel and Resorts</div>
+      <div class="info-card-text">Location - Gangaur Hotel and Resorts</div>
 
       <div class="info-card-map">
         <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=75.6253%2C25.4222%2C75.6453%2C25.4422&amp;layer=mapnik&amp;marker=25.4321734%2C75.6353202" title="Map showing Gangaur Hotel and Resorts in Bundi" loading="eager"></iframe>
